@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F2EB"
+    tools:context=".Add_vehicule">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="#A3B5C0">
+
+
+        <EditText
+            android:id="@+id/matricule_vehicule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawablePadding="50dp"
+            android:hint="Matricule Véhicule"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="15dp" />
+
+        <EditText
+            android:id="@+id/marque_vehicule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawablePadding="50dp"
+            android:hint="Marque Véhicule"
+            android:layout_below="@id/matricule_vehicule"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="15dp" />
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:id="@+id/save_vehicule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_item"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="127dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="119dp"
+        android:backgroundTint="#213A5C"
+        android:text="SAVE"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/save_vehicule"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="123dp"
+        android:text="HOME"
+        android:textColor="@color/white"
+        android:backgroundTint="#213A5C"/>
+
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="329dp"
+        android:layout_height="220dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="83dp"
+        android:src="@drawable/add_vehicule" />
+
+</RelativeLayout>
