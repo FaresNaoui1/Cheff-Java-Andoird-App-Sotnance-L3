@@ -5,10 +5,7 @@ import java.util.List;
 
 
 public class Location {
-@Override
-    public String toString() {
-        return "Location [idLocation=" + idLocation + ", location=" + location + "]";
-    }
+
 public Location(String location) {
         this.location = location;
     }
@@ -44,5 +41,14 @@ public void setLocation(String location) {
 
     public void setVehicules(List<Vehicule> vehicules) {
         this.vehicules = vehicules;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "idLocation=" + idLocation +
+                ", location='" + location + '\'' +
+                ", vehicules=" + vehicules +
+                '}';
     }
 }

@@ -1,6 +1,8 @@
 package com.example.company.retrofit;
 
+import com.example.company.Entety.entity.Cheffeur;
 import com.example.company.Entety.entity.Facture;
+import com.example.company.Entety.entity.Mecanician;
 import com.example.company.Entety.entity.Onpanne;
 import com.example.company.Entety.entity.Person;
 import com.example.company.Entety.entity.Piece;
@@ -27,11 +29,34 @@ public interface AllApi {
     Call<Person> addPerson(@Body Person person);
     @PUT("/api/v1/person/{id}")
     Call<Person> updatePerson(@Path("id") Long id, @Body Person person);
-
     @DELETE("/api/v1/person/{id}")
     Call<Void> deletePerson(@Path("id") Long id);
     @GET("/api/v1/person/{id}")
     Call<Person> getPerson(@Path("id") Long id);
+    //cheffeur
+    @DELETE("/api/v1/cheffeur/{id}")
+    Call<Void> deleteCheffeur(@Path("id") Long id);
+    @GET("/api/v1/cheffeur/{id}")
+    Call<Cheffeur> getCheffeur(@Path("id") Long id);
+
+    @GET("/api/v1/cheffeur")
+    Call<List<Cheffeur>> getCheffeurs();
+    @POST("/api/v1/cheffeur")
+    Call<Cheffeur> addCheffeur(@Body Cheffeur person);
+    @PUT("/api/v1/cheffeur/{id}")
+    Call<Cheffeur> updateCheffeur(@Path("id") Long id, @Body Cheffeur person);
+//mecanician
+@GET("/api/v1/mecancian")
+Call<List<Mecanician>> getMecanicians();
+    @POST("/api/v1/mecancian")
+    Call<Mecanician> addMecanician(@Body Mecanician person);
+    @PUT("/api/v1/mecancian/{id}")
+    Call<Mecanician> updateMecanician(@Path("id") Long id, @Body Mecanician person);
+    @DELETE("/api/v1/mecancian/{id}")
+    Call<Void> deleteMecanician(@Path("id") Long id);
+    @GET("/api/v1/mecancian/{id}")
+    Call<Mecanician> getMecanician(@Path("id") Long id);
+
 
 //VEHICULES
 @GET("/api/v1/vehicule")

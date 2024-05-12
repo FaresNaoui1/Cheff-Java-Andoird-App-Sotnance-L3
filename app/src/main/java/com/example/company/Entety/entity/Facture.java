@@ -15,7 +15,17 @@ private String facture;
 
 
 private List<Piece> piece;
-public Facture(){}
+
+    @Override
+    public String toString() {
+        return "Facture{" +
+                "idFacture=" + idFacture +
+                ", facture='" + facture + '\'' +
+                ", piece=" + piece +
+                '}';
+    }
+
+    public Facture(){}
 public Facture(Long idFacture){this.idFacture=idFacture;}
 public Facture(Long idFacture,String facture){this.idFacture=idFacture;this.facture=facture;}
 
@@ -32,10 +42,7 @@ public void setFacture(String facture) {
     this.facture = facture;
 }
 
-@Override
-    public String toString() {
-        return "Facture [idFacture=" + idFacture + ", facture=" + facture + "]";
-    }
+
 
     public List<Piece> getPiece() {
         return piece;

@@ -1,18 +1,18 @@
 package com.example.company.Entety.entity;
 
+
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
 
-
-
-public class Person {
+public class Mecanician {
 
     private Long id;
     private String firstName;
     private String name;
-   // private LocalDate birthdate;
+
     private int sellPhone;
     private String email;
     private String password;
@@ -49,13 +49,7 @@ public class Person {
         this.name = name;
     }
 
-   /* public LocalDate getBirthdate() {
-        return birthdate;
-    }
 
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }*/
 
     public int getSellPhone() {
         return sellPhone;
@@ -81,7 +75,6 @@ public class Person {
         this.roll = roll;
     }
 
-
     @Override
     public String toString() {
         return "Person{" +
@@ -93,7 +86,8 @@ public class Person {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", image=" + Arrays.toString(image) +
-
+                ", vehicules=" + vehicules +
+                ", roll=" + roll +
                 '}';
     }
 

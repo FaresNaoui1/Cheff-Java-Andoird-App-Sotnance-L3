@@ -1,13 +1,11 @@
 package com.example.company;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.company.Entety.entity.Vehicule;
 import com.example.company.retrofit.AllApi;
@@ -70,7 +68,7 @@ public class Update_vehicule extends AppCompatActivity {
         Long vehiculeId = Long.parseLong(idInput.getText().toString());
         Vehicule vehicule = new Vehicule();
         vehicule.setVehiculeMatriquelle(matricl);
-        vehicule.setVehiculeMarque(markl);
+        vehicule.setVehiculemarque(markl);
         allApi.updateVehicule(vehiculeId,vehicule).enqueue(new Callback<Vehicule>() {
             @Override
             public void onResponse(Call<Vehicule> call, Response<Vehicule> response) {

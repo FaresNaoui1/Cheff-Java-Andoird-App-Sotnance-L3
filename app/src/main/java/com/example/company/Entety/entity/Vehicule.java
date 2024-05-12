@@ -1,58 +1,96 @@
 package com.example.company.Entety.entity;
 
-
 import java.util.Arrays;
 import java.util.List;
 
 public class Vehicule {
-    public Vehicule(Long idVehicule, String vehiculeMatriquelle) {
+
+    public Vehicule(Long idVehicule, String matricule, VehiculeType vehiculeType) {
         this.idVehicule = idVehicule;
-        VehiculeMatriquelle = vehiculeMatriquelle;
+        this.matricule = matricule;
+        this.vehiculeType = vehiculeType;
     }
 
     public Vehicule() {
     }
 
-    @Override
-    public String toString() {
-        return "Vehicule{" +
-                "idVehicule=" + idVehicule +
-                ", vehiculeMatriquelle='" + VehiculeMatriquelle +
-                ", vehiculeMMarque='" + VehiculeMarque +
-                ", imageBlob=" + Arrays.toString(image) +
-                '}';
+    public String getVehiculemarque() {
+        return vehiculemarque;
+    }
+
+    public void setVehiculemarque(String vehiculemarque) {
+        this.vehiculemarque = vehiculemarque;
     }
 
 
     private Long idVehicule;
-    private String VehiculeMatriquelle;
 
-    public void setVehiculeMarque(String vehiculeMarque) {
-        VehiculeMarque = vehiculeMarque;
+
+    private byte[] image;
+    private  String matricule;
+
+    @Override
+    public String toString() {
+        return "Vehicule{" +
+                "idVehicule=" + idVehicule +
+
+                ", image=" + Arrays.toString(image) +
+                ", matricule='" + matricule + '\'' +
+                ", vehiculemarque='" + vehiculemarque + '\'' +
+                ", persons=" + persons +
+                '}';
     }
 
-    private String VehiculeMarque;
-    private byte[] image;
+    public String getMatricule() {
+        return matricule;
+    }
+
+    public void setMatricule(String matricule) {
+        this.matricule = matricule;
+    }
+
+    private String vehiculemarque;
+
 
     private List<Person> persons;
 
 
 
-private VehiculeMarque vehiculeMarque;
+    private VehiculeType vehiculeType;
+
+    public VehiculeType getVehiculeType() {
+        return vehiculeType;
+    }
+
+    public void setVehiculeType(VehiculeType vehiculeType) {
+        this.vehiculeType = vehiculeType;
+    }
+
+    private Location location;
 
 
-private VehiculeType vehiculeType;
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
 
-private Location location;
+    private Onpanne onpanne;
 
 
+    public Onpanne getOnpanne() {
+        return onpanne;
+    }
 
-private Onpanne onpanne;
-
+    public void setOnpanne(Onpanne onpanne) {
+        this.onpanne = onpanne;
+    }
 
     public Vehicule(String vehiculeMatriquelle) {
-        VehiculeMatriquelle = vehiculeMatriquelle;
+        vehiculeMatriquelle = vehiculeMatriquelle;
     }
 
     public Long getIdVehicule() {
@@ -63,12 +101,10 @@ private Onpanne onpanne;
         this.idVehicule = idVehicule;
     }
 
-    public String getVehiculeMatriquelle() {
-        return VehiculeMatriquelle;
-    }
+
 
     public void setVehiculeMatriquelle(String vehiculeMatriquelle) {
-        VehiculeMatriquelle = vehiculeMatriquelle;
+        vehiculeMatriquelle = vehiculeMatriquelle;
     }
 
     public List<Person> getPersons() {
@@ -87,38 +123,4 @@ private Onpanne onpanne;
         this.image = image;
     }
 
-    public Onpanne getOnpanne() {
-        return onpanne;
-    }
-
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public VehiculeType getVehiculeType() {
-        return vehiculeType;
-    }
-
-
-    public VehiculeMarque getVehiculeMarque() {
-        return vehiculeMarque;
-    }
-
-
-    public void setOnpanne(Onpanne onpanne) {
-        this.onpanne = onpanne;
-    }
-
-    public void setVehiculeType(VehiculeType vehiculeType) {
-        this.vehiculeType = vehiculeType;
-    }
-
-    public void setVehiculeMarque(VehiculeMarque vehiculeMarque) {
-        this.vehiculeMarque = vehiculeMarque;
-    }
 }

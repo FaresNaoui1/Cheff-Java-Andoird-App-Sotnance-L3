@@ -59,7 +59,7 @@
 
 
     <Button
-        android:id="@+id/save_vehicule"
+        android:id="@+id/dash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/card_item"
@@ -75,7 +75,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/save_vehicule"
+        android:layout_below="@id/dash"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="123dp"

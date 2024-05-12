@@ -21,11 +21,16 @@ public class VehiculeMarque {
     }
     public VehiculeMarque() {
     }
+
     @Override
     public String toString() {
-        return "VehiculeMarque [IdVM=" + IdVM + ", Vehiculemarque=" + Vehiculemarque + "]";
+        return "VehiculeMarque{" +
+                "IdVM=" + IdVM +
+                ", Vehiculemarque='" + Vehiculemarque + '\'' +
+                ", vehicules=" + vehicules +
+                '}';
     }
- 
+
     public Long getIdVM() {
         return IdVM;
     }

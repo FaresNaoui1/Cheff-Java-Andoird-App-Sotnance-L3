@@ -4,11 +4,17 @@ package com.example.company.Entety.entity;
 import java.util.List;
 
 public class Onpanne {
-@Override
+    @Override
     public String toString() {
-        return "Onpanne [IdPanne=" + IdPanne + ", onpanne=" + onpanne + "]";
+        return "Onpanne{" +
+                "IdPanne=" + IdPanne +
+                ", onpanne='" + onpanne + '\'' +
+                ", vehicules=" + vehicules +
+                ", piece=" + piece +
+                '}';
     }
-public Onpanne(String onpanne) {
+
+    public Onpanne(String onpanne) {
         this.onpanne = onpanne;
     }
 public Onpanne() {

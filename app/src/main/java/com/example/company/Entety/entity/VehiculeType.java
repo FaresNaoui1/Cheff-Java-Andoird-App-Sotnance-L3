@@ -21,12 +21,17 @@ public VehiculeType(Long idVType, String vehiculetype) {
     }
 public VehiculeType() {
     }
-@Override
+
+    @Override
     public String toString() {
-        return "VehiculeType [IdVType=" + IdVType + ", Vehiculetype=" + Vehiculetype + "]";
+        return "VehiculeType{" +
+                "IdVType=" + IdVType +
+                ", Vehiculetype='" + Vehiculetype + '\'' +
+                ", vehicules=" + vehicules +
+                '}';
     }
 
-public Long getIdVType() {
+    public Long getIdVType() {
     return IdVType;
 }
 public void setIdVType(Long idVType) {

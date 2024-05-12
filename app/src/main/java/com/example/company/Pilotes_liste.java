@@ -1,109 +1,88 @@
 package com.example.company;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
+import com.example.company.Controllers.CheffeurController;
+import com.example.company.Controllers.PersonController;
+import com.example.company.Controllers.RollController;
+import com.example.company.Entety.entity.Cheffeur;
 import com.example.company.Entety.entity.Person;
 import com.example.company.Entety.entity.Roll;
-import com.example.company.retrofit.AllApi;
-import com.example.company.retrofit.RetrofitService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 public class Pilotes_liste extends AppCompatActivity {
 
     RecyclerView recyclerview_pilote ;
     FloatingActionButton add_pilote;
     Long id=3L;
     Roll roll;
-    private List<Person> people = new ArrayList<>();
+    private CheffeurController personController;
+    private  RollController rollController;
+    private List<Cheffeur> people = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilotes_liste);
+rollController = new RollController();
+        personController = new CheffeurController();
 GetRoll();
-GetCHeffeurApi();
+getCHeffeurApi();
+
         add_pilote = findViewById(R.id.add_pilotes);
         recyclerview_pilote = findViewById(R.id.recyclerview_pilotes);
 
 
-
         recyclerview_pilote.setLayoutManager(new LinearLayoutManager(this));
         recyclerview_pilote.setAdapter(new Adapter.Adapter_Cheffeur(getApplicationContext(),people));
-        add_pilote.setOnClickListener(new View.OnClickListener() {
+      add_pilote.setOnClickListener(v -> { Intent intent = new Intent(Pilotes_liste.this, Add_pilote.class);
+          startActivity(intent);});
+    }
+    void GetRoll() {
+        rollController.GetRoll(id, new RollController.RollCallback() {
             @Override
-            public void onClick(View v) {
+            public void onSuccess(Roll body) {
+                roll = body;
+            }
 
-                Intent intent = new Intent(Pilotes_liste.this, Add_pilote.class);
-                startActivity(intent);
+            @Override
+            public void onError(String message) {
+
             }
         });
     }
-    void GetRoll( )
-    {
-        RetrofitService retrofitService = new RetrofitService();
-        AllApi allApi = retrofitService.getRetrofit().create(AllApi.class);
-        allApi.getRoll(id).enqueue(new Callback<Roll>() {
-            @Override
-            public void onResponse(Call<Roll> call, Response<Roll> response) {
-                if(response.isSuccessful())
-                {
-                    roll= response.body();
-                    Toast.makeText(Pilotes_liste.this, "get roll successfully", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(Pilotes_liste.this, "failed to get roll", Toast.LENGTH_SHORT).show();
-                }
-            }
+    private void getCHeffeurApi() {
+      personController.getAllCheffeurs(new CheffeurController.CheffeurListCallback() {
+          @Override
+          public void onSuccess(List<Cheffeur> cheffeurs) {
+              Toast.makeText(Pilotes_liste.this, "Successfully retrieved persons", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onFailure(Call<Roll> call, Throwable t) {
+              people = cheffeurs;
+              refreshRecyclerView();
+          }
 
-            }
-        });
-
+          @Override
+          public void onError(String message) {
+              Toast.makeText(Pilotes_liste.this, "Failed to retrieve persons: " + message, Toast.LENGTH_SHORT).show();
+              Log.d("ffffffffffffffffffffffff",message);
+          }
+      });
     }
-    private void GetCHeffeurApi()
-    {
-        RetrofitService retrofitService = new RetrofitService();
-        AllApi allApi = retrofitService.getRetrofit().create(AllApi.class);
-        allApi.getPersons().enqueue(new Callback<List<Person>>() {
-            @Override
-            public void onResponse(Call<List<Person>> call, Response<List<Person>> response) {
-                if( response.isSuccessful())
-                {
-                    List<Person> peoples = response.body();
-                    for(Person person : peoples)
-                    {
-                        if(person.getRoll()==roll)
-                        {
-                            people=peoples;
-                        }
-                    }
 
-                    Toast.makeText(Pilotes_liste.this, "get chefeur successfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Pilotes_liste.this, "failed to get chefeur", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Person>> call, Throwable t) {
-                Toast.makeText(Pilotes_liste.this, "failed to get chefeur", Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void refreshRecyclerView() {
+        recyclerview_pilote.setLayoutManager(new LinearLayoutManager(this));
+        recyclerview_pilote.setAdapter(new Adapter.Adapter_Cheffeur(getApplicationContext(),people));
     }
+
+
+
 }

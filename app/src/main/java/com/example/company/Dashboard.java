@@ -1,15 +1,21 @@
 package com.example.company;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.company.Controllers.PersonController;
+import com.example.company.Entety.entity.Person;
 
 public class Dashboard extends AppCompatActivity {
+    TextView username ;
 
+    PersonController personController;
+  Long id ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +28,9 @@ public class Dashboard extends AppCompatActivity {
         ImageView imgParametres = findViewById(R.id.imageView4);
         ImageView imgProfile = findViewById(R.id.profile);
 
+        personController = new PersonController();
 
+        username = findViewById(R.id.textprofile);
 
         imgVehicules.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +44,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Dashboard.this, Mecanicniciens_liste.class);
+                Intent intent = new Intent(Dashboard.this, Mecaniciens_liste.class);
                 startActivity(intent);
             }
         });
@@ -69,11 +77,34 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(Dashboard.this, Profile.class);
+                intent.putExtra("PersonId", id);
                 startActivity(intent);
             }
         });
+        long receivedPersonId = getIntent().getLongExtra("personId", -1);
+        if (receivedPersonId != -1) {
+            id = receivedPersonId;
+            getProfile();
+        }
 
+    }
+    private void getProfile() {
+        personController.getPersonById(id, new PersonController.PersonCallback() {
+            @Override
+            public void onSuccess() {
 
+            }
 
+            @Override
+            public void onSuccess(Person person) {
+                username.setText("Bienvenue mr:"+person.getName());
+
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 }

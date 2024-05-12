@@ -7,59 +7,75 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.company.Controllers.PersonController;
 import com.example.company.Entety.entity.Person;
-import com.example.company.retrofit.AllApi;
-import com.example.company.retrofit.RetrofitService;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Register extends AppCompatActivity {
+    private PersonController personController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        initalaizeComponents();
+        personController = new PersonController();
+        initializeComponents();
     }
 
-    private void initalaizeComponents() {
-        EditText UserName = findViewById(R.id.username);
-        EditText Email = findViewById(R.id.email);
-        EditText Password = findViewById(R.id.password);
-        Button Register = findViewById(R.id.regibutton);
+    private void initializeComponents() {
+        EditText userName = findViewById(R.id.nom);
+        EditText email = findViewById(R.id.email);
+        EditText password = findViewById(R.id.password);
+        EditText FreestNAME = findViewById(R.id.prenom);
+        EditText PHONE = findViewById(R.id.telephone);
 
-        RetrofitService retrofitService = new RetrofitService();
-        AllApi allApi =  retrofitService.getRetrofit().create(AllApi.class);
-        Register.setOnClickListener(v -> {
-            String username =String.valueOf( UserName.getText());
-            String email=String.valueOf( Email.getText());
-            String password=String.valueOf( Password.getText());
-            if (username.isEmpty() || email.isEmpty()|| password.isEmpty()) {
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        Button registerButton = findViewById(R.id.regibutton);
+        registerButton.setOnClickListener(v -> {
+            String Username = userName.getText().toString().trim();
+            String UserEmail = email.getText().toString().trim();
+            String UserPassword = password.getText().toString().trim();
+            String firstname = FreestNAME.getText().toString().trim();
+            String phoneStr = PHONE.getText().toString().trim();
+
+            if (Username.isEmpty() || UserEmail.isEmpty() || UserPassword.isEmpty() || firstname.isEmpty() || phoneStr.isEmpty()) {
+                Toast.makeText(Register.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            // Additional error handling for phone number parsing
+            int phone;
+            try {
+                phone = Integer.parseInt(phoneStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(Register.this, "Invalid phone number", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Person person = new Person();
-            person.setName(username);
-            person.setEmail(email);
-            person.setPassword(password);
-            allApi.addPerson(person).enqueue(new Callback<Person>() {
+            person.setName(Username);
+            person.setFirstName(firstname);
+            person.setSellPhone(phone);
+            person.setEmail(UserEmail);
+            person.setPassword(UserPassword);
+
+            personController.addPerson(person, new PersonController.PersonCallback() {
                 @Override
-                public void onResponse(Call<Person> call, Response<Person> response) {
-                    Toast.makeText(Register.this,"add person successfully ",Toast.LENGTH_SHORT).show();
+                public void onSuccess() {
+                    Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                    // Optionally, you can navigate to another activity or perform any other action here
                 }
 
                 @Override
-                public void onFailure(Call<Person> call, Throwable throwable) {
-                    Toast.makeText(Register.this,"failed to add person",Toast.LENGTH_SHORT).show();
-                    Logger.getLogger(Register.class.getName()).log(Level.SEVERE,"EROOR ",throwable);
+                public void onSuccess(Person person) {
+                    Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError(String message) {
+                    Toast.makeText(Register.this, "Registration failed: " + message, Toast.LENGTH_SHORT).show();
                 }
             });
         });
+
     }
 }

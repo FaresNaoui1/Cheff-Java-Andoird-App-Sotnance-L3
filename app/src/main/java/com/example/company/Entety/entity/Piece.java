@@ -35,9 +35,15 @@ public String getPieceName() {
 public void setPieceName(String pieceName) {
     PieceName = pieceName;
 }
-@Override
+
+    @Override
     public String toString() {
-        return "Piece [idPiece=" + idPiece + ", PieceName=" + PieceName + "]";
+        return "Piece{" +
+                "idPiece=" + idPiece +
+                ", PieceName='" + PieceName + '\'' +
+                ", onpanne=" + onpanne +
+                ", facture=" + facture +
+                '}';
     }
 
     public List<Onpanne> getOnpanne() {
